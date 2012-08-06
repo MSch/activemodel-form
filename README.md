@@ -56,7 +56,9 @@ If you use `simple_form` or `formtastic`, they automatically create date_time or
 
 ## Future
 
-This gem doesn't hook into or monkey patches any Rails (or `simple_form` or `formtastic`) internals, it only uses the ActiveModel API. So it should be future proof.
+This gem doesn't hook into any Rails (or `simple_form` or `formtastic`)
+internals and doesn't monkey patch anything, it only uses the ActiveModel API.
+So it should be future proof.
 
 ## Contributing
 
