@@ -1,18 +1,16 @@
 require 'active_model'
-require 'active_model/form/attribute_assignment'
 require 'active_model/form/version'
 require 'active_support/inflector'
 
 module ActiveModel
   class Form
-    include ActiveModel::Form::AttributeAssignment
     include ActiveModel::Validations
     include ActiveModel::Conversion
     include ActiveModel
     extend ActiveModel::Naming
 
     def initialize(attributes=nil)
-      self.assign_attributes attributes
+      self.assign_attributes(attributes)
     end
 
     # For the Rails route helpers
@@ -28,7 +26,7 @@ module ActiveModel
     def self.attribute(name, type_name)
       # TODO: Make inheritance of ActiveModel::Forms do the right thing with attributes
       @_attributes ||= {}
-      @_attributes[name.to_sym] = self.type_from_type_name(type_name)
+      @_attributes[name.to_s] = self.type_from_type_name(type_name)
       self.send(:attr_accessor, name)
     end
 
@@ -38,36 +36,49 @@ module ActiveModel
 
     # Returns the class object for the named attribute.
     def class_for_attribute(name)
-      self.class.attributes[name.to_sym]
+      self.class.attributes[name.to_s]
     end
 
-    # Stolen from ActiveRecord attribute_assignment.rb
-    def attributes=(new_attributes, options={})
+    def assign_attributes(new_attributes)
       return if new_attributes.blank?
-
-      attributes = new_attributes.stringify_keys
-      multi_parameter_attributes = []
-
-      attributes.each do |k, v|
-        if k.include?("(")
-          multi_parameter_attributes << [ k, v ]
-        elsif respond_to?("#{k}=")
-          if v.is_a?(Hash)
-            raise(UnknownAttributeError, "ActiveModel::Form doesn't deal with nested attributes for now: #{k}")
-          else
-            send("#{k}=", v)
-          end
-        else
-          raise(UnknownAttributeError, "unknown attribute: #{k}")
+      new_attributes = self.clean_attributes(new_attributes)
+      new_attributes.each do |k, v|
+        if attribute = self.class.attributes[k].presence
+          send("#{k}=", attribute.new(*v))
         end
       end
     end
 
     protected
 
+    def clean_attributes(attributes)
+      cleaned_attributes = {}
+
+      attributes.stringify_keys.each do |k, v|
+        if k.include?("(")
+          attribute_name = k.split("(").first
+          cleaned_attributes[attribute_name] ||= []
+          v = v.empty? ? nil : type_cast_attribute_value(k, v)
+          cleaned_attributes[attribute_name][find_parameter_position(k)] ||= v
+        else
+          cleaned_attributes[k] = v
+        end
+      end
+
+      cleaned_attributes
+    end
+
     def self.type_from_type_name(type_name)
       classified_type_name = ActiveSupport::Inflector.classify(type_name)
       ActiveSupport::Inflector.safe_constantize(classified_type_name)
+    end
+
+    def type_cast_attribute_value(multiparameter_name, value)
+      multiparameter_name =~ /\([0-9]*([if])\)/ ? value.send("to_" + $1) : value
+    end
+
+    def find_parameter_position(multiparameter_name)
+      multiparameter_name.scan(/\(([0-9]*).*\)/).first.first.to_i - 1
     end
   end
 end
