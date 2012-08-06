@@ -1,4 +1,3 @@
-require 'active_model-form'
 class FormsController < ApplicationController
   class SearchForm < ActiveModel::Form
     self.model_name = 'q'
