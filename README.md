@@ -54,6 +54,8 @@ and the view:
 
 If you use `simple_form` or `formtastic`, they automatically create date_time or boolean inputs based on your form object.
 
+Also check out the example project.
+
 ## Future
 
 This gem doesn't hook into any Rails (or `simple_form` or `formtastic`)
