@@ -1,5 +1,6 @@
 require 'active_model'
 require 'active_model/form/version'
+require 'active_model/form/attributes'
 require 'active_support/inflector'
 
 module ActiveModel
@@ -44,7 +45,7 @@ module ActiveModel
       new_attributes = self.clean_attributes(new_attributes)
       new_attributes.each do |k, v|
         if attribute = self.class.attributes[k].presence
-          send("#{k}=", attribute.new(*v))
+          send("#{k}=", attribute.parse(v))
         end
       end
     end
@@ -70,7 +71,7 @@ module ActiveModel
 
     def self.type_from_type_name(type_name)
       classified_type_name = ActiveSupport::Inflector.classify(type_name)
-      ActiveSupport::Inflector.safe_constantize(classified_type_name)
+      ActiveSupport::Inflector.safe_constantize("::ActiveModel::Form::#{classified_type_name}Attribute")
     end
 
     def type_cast_attribute_value(multiparameter_name, value)
