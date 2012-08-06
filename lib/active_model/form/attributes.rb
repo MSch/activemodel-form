@@ -88,7 +88,7 @@ module ActiveModel
 
     module DateTimeAttribute
       def self.parse(v)
-        if v.present?
+        if v.compact.present?
           DateTime.new(*v)
         else
           nil
