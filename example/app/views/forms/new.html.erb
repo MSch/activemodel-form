@@ -1,0 +1,5 @@
+<%= simple_form_for @search, url: form_path do |f| %>
+  <%= f.input :username %>
+  <%= f.input :created_at, as: :datetime %>
+  <%= f.button :submit %>
+<% end %>
