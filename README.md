@@ -18,7 +18,45 @@ Add this line to your application's Gemfile:
 
 ## Usage
 
-TODO: Write usage instructions here
+In the controller:
+
+```
+class FormsController < ApplicationController
+  class SearchForm < ActiveModel::Form
+    self.model_name = 'q'
+    attribute :username, :string
+    attribute :created_at, :date_time
+    attribute :locked, :boolean
+
+    validates_presence_of :username
+    validates_presence_of :created_at
+  end
+  
+  def search
+    @search = SearchForm.new(params[:q])
+    if @search.valid?
+      @users = User.where(username: @search.username)...
+    end
+  end
+end
+```
+
+and the view:
+
+```
+<%= form_for @search, url: form_path do |f| %>
+  <%= f.text_field :username %><br />
+  <%= f.datetime_select :created_at %><br />
+  <%= f.check_box :locked %><br />
+  <%= f.submit %>
+<% end %>
+```
+
+If you use `simple_form` or `formtastic`, they automatically create date_time or boolean inputs based on your form object.
+
+## Future
+
+This gem doesn't hook into or monkey patches any Rails (or `simple_form` or `formtastic`) internals, it only uses the ActiveModel API. So it should be future proof.
 
 ## Contributing
 
