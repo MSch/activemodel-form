@@ -20,10 +20,10 @@ Add this line to your application's Gemfile:
 
 In the controller:
 
-```
+```ruby
 class FormsController < ApplicationController
   class SearchForm < ActiveModel::Form
-    self.model_name = 'q'
+    self.model_name = 'q' # => <input name="q[username]" ... /> etc.
     attribute :username, :string
     attribute :created_at, :date_time
     attribute :locked, :boolean
