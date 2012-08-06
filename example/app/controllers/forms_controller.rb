@@ -2,7 +2,8 @@ class FormsController < ApplicationController
   class SearchForm < ActiveModel::Form
     self.model_name = 'q'
     attribute :username, :string
-    attribute :created_at, :datetime
+    attribute :created_at, :date_time
+    attribute :locked, :boolean
 
     validates_presence_of :username
     validates_presence_of :created_at

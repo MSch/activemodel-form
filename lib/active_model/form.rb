@@ -35,8 +35,8 @@ module ActiveModel
       @_attributes ||= {}
     end
 
-    # Returns the class object for the named attribute.
-    def class_for_attribute(name)
+    # Returns the column object for the named attribute.
+    def column_for_attribute(name)
       self.class.attributes[name.to_s]
     end
 

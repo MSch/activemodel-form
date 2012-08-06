@@ -13,8 +13,12 @@ module ActiveModel
         end
       end
 
-      def self.klass
-        Object # Rails does that too, since Ruby doesn't have Boolean, only TrueClass/FalseClass/NilClass
+      def self.type
+        :boolean
+      end
+
+      def self.number?
+        false
       end
     end
 
@@ -29,9 +33,12 @@ module ActiveModel
         end
       end
 
-      def self.klass
-        # TODO: I suspect Rails sometimes returns Fixnum, sometimes Bignum. Investigate.
-        Integer
+      def self.type
+        :integer
+      end
+
+      def self.number?
+        true
       end
     end
 
@@ -46,8 +53,12 @@ module ActiveModel
         end
       end
 
-      def self.klass
-        Float
+      def self.type
+        :float
+      end
+
+      def self.number?
+        true
       end
     end
 
@@ -62,12 +73,20 @@ module ActiveModel
         end
       end
 
-      def self.klass
-        String
+      def self.type
+        :string
+      end
+
+      def self.number?
+        false
+      end
+
+      def self.limit
+        nil
       end
     end
 
-    module DatetimeAttribute
+    module DateTimeAttribute
       def self.parse(v)
         if v.present?
           DateTime.new(*v)
@@ -76,9 +95,12 @@ module ActiveModel
         end
       end
 
-      def self.klass
-        # Investigate when/if Rails returns Date/Time/DateTime classes
-        Time
+      def self.type
+        :timestamp
+      end
+
+      def self.number?
+        false
       end
     end
   end

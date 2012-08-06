@@ -1,5 +1,6 @@
 <%= simple_form_for @search, url: form_path do |f| %>
   <%= f.input :username %>
-  <%= f.input :created_at, as: :datetime %>
+  <%= f.input :created_at %>
+  <%= f.input :locked %>
   <%= f.button :submit %>
 <% end %>
