@@ -54,7 +54,7 @@ and the view:
 
 If you use `simple_form` or `formtastic`, they automatically create date_time or boolean inputs based on your form object.
 
-Also check out the example project.
+Also check out the [example](https://github.com/MSch/activemodel-form/tree/master/example) project.
 
 ## Future
 
