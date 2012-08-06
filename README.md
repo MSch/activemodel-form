@@ -35,7 +35,7 @@ class FormsController < ApplicationController
   def search
     @search = SearchForm.new(params[:q])
     if @search.valid?
-      @users = User.where(username: @search.username)...
+      @users = User.where(username: @search.username) # ...
     end
   end
 end
@@ -43,7 +43,7 @@ end
 
 and the view:
 
-```
+```html
 <%= form_for @search, url: form_path do |f| %>
   <%= f.text_field :username %><br />
   <%= f.datetime_select :created_at %><br />
