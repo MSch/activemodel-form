@@ -67,7 +67,7 @@ module ActiveModel
       end
     end
 
-    module DateTimeAttribute
+    module DatetimeAttribute
       def self.parse(v)
         if v.present?
           DateTime.new(*v)

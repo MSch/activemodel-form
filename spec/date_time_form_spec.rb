@@ -14,7 +14,7 @@ describe ActiveModel::Form do
 
   it "parses the Rails form helper datetime params" do
     class FormWithDateTime < ActiveModel::Form
-      attribute :created_at, :date_time
+      attribute :created_at, :datetime
       attribute :something_else, :string
       attribute :whatever, :string
     end
