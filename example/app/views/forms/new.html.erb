@@ -1,6 +1,16 @@
+<h1>simple_form</h1>
 <%= simple_form_for @search, url: form_path do |f| %>
   <%= f.input :username %>
   <%= f.input :created_at %>
   <%= f.input :locked %>
   <%= f.button :submit %>
+<% end %>
+
+<h1>formtastic</h1>
+<%= semantic_form_for @search, url: form_path do |f| %>
+  <%= f.input :username %>
+  <%= f.input :created_at %>
+  <%= f.input :locked %>
+
+  <%= f.action :submit, :as => :button %>
 <% end %>

@@ -9,4 +9,5 @@ gem 'sqlite3'
 gem 'pry'
 
 gem 'activemodel-form', path: '..'
+gem 'formtastic'
 gem 'simple_form'
