@@ -1,14 +1,12 @@
-require 'active_support/core_ext/object/inclusion'
-
 module ActiveModel
   class Form
     module BooleanAttribute
       def self.parse(v)
-        if v.in?('1', 't', 'true', 'yes')
+        if ['1', 't', 'true', 'yes'].include? v
           true
-        elsif v.in?('0', 'f', 'false', 'no')
+        elsif ['0', 'f', 'false', 'no'].include? v
           false
-        elsif v.in?('', nil)
+        elsif ['', nil].include? v
           nil
         else
           raise "Couldn't parse boolean attribute value: '#{v}'"
@@ -28,7 +26,7 @@ module ActiveModel
       def self.parse(v)
         if v.present?
           Integer(v)
-        elsif v.in?('', nil)
+        elsif ['', nil].include? v
           nil
         else
           raise "Couldn't parse integer attribute value: '#{v}'"
@@ -48,7 +46,7 @@ module ActiveModel
       def self.parse(v)
         if v.present?
           Float(v)
-        elsif v.in?('', nil)
+        elsif ['', nil].include? v
           nil
         else
           raise "Couldn't parse float attribute value: '#{v}'"
@@ -68,7 +66,7 @@ module ActiveModel
       def self.parse(v)
         if v.present?
           String.new(v)
-        elsif v.in?('', nil)
+        elsif ['', nil].include? v
           nil
         else
           raise "Couldn't parse string attribute value: '#{v}'"
