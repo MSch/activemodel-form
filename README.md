@@ -1,5 +1,7 @@
 # ActiveModel::Form
 
+[![Build Status](https://secure.travis-ci.org/MSch/activemodel-form.png)](http://travis-ci.org/MSch/activemodel-form)
+
 ActiveModel lets you easily create objects that can be used in form helpers and even support round-tripping (assigning the submitted params again)
 
 But ActiveModel doesn't support out of the box argument parsing, e.g. having a datetime attribute be a datetime attribute and a boolean attribute be a boolean attribute.
