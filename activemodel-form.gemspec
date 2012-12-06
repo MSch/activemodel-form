@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["martin@schuerrer.org"]
   gem.description   = %q{ActiveModel with support for booleans and datetimes in form helpers}
   gem.summary       = %q{}
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/MSch/activemodel-form"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
