@@ -2,9 +2,9 @@ module ActiveModel
   class Form
     module BooleanAttribute
       def self.parse(v)
-        if ['1', 't', 'true', 'yes'].include? v
+        if ['1', 't', 'true', 'yes', true].include? v
           true
-        elsif ['0', 'f', 'false', 'no'].include? v
+        elsif ['0', 'f', 'false', 'no', false].include? v
           false
         elsif ['', nil].include? v
           nil

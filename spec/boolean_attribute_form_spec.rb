@@ -21,4 +21,15 @@ describe ActiveModel::Form do
     form.checked.must_equal true
     form.not_set.must_equal nil # TODO: Should this be nil or false?
   end
+
+  it "accepts ordinary booleans" do
+    class FormWithBooleans < ActiveModel::Form
+      attribute :checked, :boolean
+      attribute :not_checked, :boolean
+    end
+
+    form = FormWithBooleans.new(:checked => true, :not_checked => false)
+    form.checked.must_equal true
+    form.not_checked.must_equal false
+  end
 end
