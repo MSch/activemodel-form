@@ -66,7 +66,7 @@ module ActiveModel
       def self.parse(v)
         if v.present?
           String.new(v)
-        elsif ['', nil].include? v
+        elsif ['', nil].include? v.to_s.strip
           nil
         else
           raise "Couldn't parse string attribute value: '#{v}'"
