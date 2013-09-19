@@ -6,7 +6,7 @@ require 'active_model/form/version'
 Gem::Specification.new do |gem|
   gem.name          = "activemodel-form"
   gem.version       = ActiveModel::Form::VERSION
-  gem.authors       = ["Martin Schürrer"]
+  gem.authors       = ["Martin Schuerrer"]
   gem.email         = ["martin@schuerrer.org"]
   gem.description   = %q{ActiveModel with support for booleans and datetimes in form helpers}
   gem.summary       = %q{}
