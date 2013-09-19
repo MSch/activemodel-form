@@ -103,5 +103,20 @@ module ActiveModel
         false
       end
     end
+
+    module FileAttribute
+      def self.parse(v)
+        raise "Couldn't parse file attribute value: '#{v}'" unless v.is_a?(ActionDispatch::Http::UploadedFile)
+        v
+      end
+
+      def self.type
+        :file
+      end
+
+      def self.number?
+        false
+      end
+    end
   end
 end
