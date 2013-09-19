@@ -1,3 +1,7 @@
+#### 1.0.0
+
+* Add support for file attributes (Thanks [@haihappen](https://github.com/haihappen)).
+
 #### 0.0.3
 
 * Added simplecov (Thanks [@colszowka](https://github.com/colszowka))
