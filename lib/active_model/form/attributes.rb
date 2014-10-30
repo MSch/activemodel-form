@@ -86,6 +86,24 @@ module ActiveModel
       end
     end
 
+    module DateAttribute
+      def self.parse(v)
+        if v.is_a?(String)
+          Date.parse(v)
+        else
+          nil
+        end
+      end
+
+      def self.type
+        :timestamp
+      end
+
+      def self.number?
+        false
+      end
+    end
+
     module DateTimeAttribute
       def self.parse(v)
         if v.compact.present?
