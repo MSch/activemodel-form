@@ -1,3 +1,7 @@
+#### 1.1.0
+
+* Add support for parsing date params in ISO format (YYYY-MM-DD)
+
 #### 1.0.0
 
 * Add support for file attributes (Thanks [@haihappen](https://github.com/haihappen)).
