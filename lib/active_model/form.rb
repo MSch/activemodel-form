@@ -40,6 +40,10 @@ module ActiveModel
       self.class.attributes[name.to_s]
     end
 
+    def has_attribute?(name)
+      self.class.attributes[name.to_s].present?
+    end
+
     def assign_attributes(new_attributes)
       return if new_attributes.blank?
       new_attributes = self.clean_attributes(new_attributes)
