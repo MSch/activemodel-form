@@ -1,3 +1,7 @@
+#### 1.2.0
+
+* Add has_attribute? method to conform to AR interface (#9)
+
 #### 1.1.0
 
 * Add support for parsing date params in ISO format (YYYY-MM-DD)
